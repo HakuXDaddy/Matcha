@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Member Ship</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/736x/04/27/e7/0427e72887a0a930e63c15f5fb70f4b6.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 85%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        #addBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #backBtn {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        #memberList {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 8px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Add Member</h2>
+        <input type="text" id="phoneInput" placeholder="Enter Phone Number">
+        <button id="addBtn" onclick="addMember()">Add Member</button>
+        <button id="backBtn" onclick="window.location.href='type_powder.html'">Go Back</button>
+
+        <h3>Saved Members:</h3>
+        <div id="memberList"></div>
+    </div>
+
+    <script>
+        function addMember() {
+            const phone = document.getElementById("phoneInput").value.trim();
+            if (!phone) {
+                alert("Please enter a phone number.");
+                return;
+            }
+
+            // Load existing members from localStorage
+            let members = JSON.parse(localStorage.getItem("members")) || [];
+
+            // Add new member if not duplicate
+            if (!members.includes(phone)) {
+                members.push(phone);
+                localStorage.setItem("members", JSON.stringify(members));
+                alert("Member added successfully!");
+                document.getElementById("phoneInput").value = "";
+                displayMembers();
+            } else {
+                alert("Phone number already exists.");
+            }
+        }
+
+        function displayMembers() {
+            let members = JSON.parse(localStorage.getItem("members")) || [];
+            const memberList = document.getElementById("memberList");
+            if (members.length === 0) {
+                memberList.innerHTML = "No members added yet.";
+            } else {
+                memberList.innerHTML = members.map(m => `<div>${m}</div>`).join("");
+            }
+        }
+
+        window.onload = displayMembers;
+    </script>
+
+</body>
+</html>

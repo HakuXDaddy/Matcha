@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matcha Shop Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #fff;
+            /* Add background image */
+            background: url('https://i.pinimg.com/736x/04/27/e7/0427e72887a0a930e63c15f5fb70f4b6.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+        }
+
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* semi-transparent black overlay */
+            z-index: 0;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            position: relative;
+            z-index: 1;
+            /* above overlay */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(76, 175, 80, 0.9);
+            /* semi-transparent green */
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .toolbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .toolbar nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .toolbar nav a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            z-index: 1;
+            /* above overlay */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero img {
+            max-width: 300px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #fff;
+            /* text color for visibility on background */
+        }
+
+        /* Powder buttons */
+        .powder-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .powder-buttons button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .powder-buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        .ceremonial {
+            background-color: #4CAF50;
+        }
+
+        .premium {
+            background-color: #2196F3;
+        }
+
+        .culinary {
+            background-color: #FF9800;
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .powder-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="logo">Matcha Powder Shop</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="member_ship.html">Member Ship</a>
+            <a href="type_powder.html">Powder Type</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <img src="https://i.pinimg.com/736x/e3/f6/8c/e3f68c3c7743b2ef55b40bed827f58fd.jpg" alt="Matcha Hero">
+        <h1>Welcome to Matcha Powder Shop</h1>
+        <p>Choose your favorite type of powder and enjoy the finest matcha experience!</p>
+
+        <div class="powder-buttons">
+            <button class="ceremonial" onclick="window.location.href='ceremonial_form.html'">Ceremonial</button>
+            <button class="premium" onclick="window.location.href='premium_form.html'">Premium</button>
+            <button class="culinary" onclick="window.location.href='culinary_form.html'">Culinary</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

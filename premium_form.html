@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Premium Grade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/1200x/08/60/ec/0860ec25617e3d0289cdbb0ae172eaea.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-box {
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        #cartDisplay {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 8px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Premium Grade</h2>
+
+        <div class="image-box">
+            <img src="https://i.pinimg.com/736x/c1/15/78/c11578985830c51a7ffbfd4f527558a9.jpg" alt="Premium Matcha"
+                style="max-width: 100%; max-height: 300px; object-fit: contain; border-radius: 10px;">
+        </div>
+
+        <!-- Add To Cart -->
+        <button style="background-color:#4CAF50; color:white;" onclick="addToCart()">
+            Add To Cart
+        </button>
+
+        <!-- Go Back -->
+        <button style="background-color:#ff5722; color:white;" onclick="window.location.href='type_powder.html'">
+            Go Back
+        </button>
+
+        <!-- Cart View -->
+        <div id="cartDisplay">
+            <strong>Your Cart:</strong>
+            <div id="cartItems"></div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart() {
+            const item = {
+                name: "Premium Grade",
+                price: 20,
+                qty: 1
+            };
+
+            // Load existing cart or create empty array
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+            // Check if item exists
+            let existing = cart.find(p => p.name === item.name);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(item);
+            }  
+
+            // Save changes
+            localStorage.setItem("cartArray", JSON.stringify(cart));
+
+            alert("Premium Grade added to cart!");
+            showCart();
+        }
+
+        // Display cart items
+        function showCart() {
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+            let display = document.getElementById("cartItems");
+
+            if (cart.length === 0) {
+                display.innerText = "Cart is empty.";
+                return;
+            }
+
+            display.innerHTML = cart
+                .map(item => `${item.name} - $${item.price} x ${item.qty}`)
+                .join("<br>");
+        }
+
+        // Load cart on open
+        window.onload = showCart;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Culinary Grade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/1200x/71/25/4e/71254e254b2b0d7af1bc93d53019edda.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        #cartDisplay {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 8px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Culinary Grade</h2>
+
+        <img src="https://i.pinimg.com/1200x/a4/8a/dd/a48add6055db4107c97bf0b6d1f6073e.jpg"
+            style="max-width: 100%; border-radius: 10px; margin-bottom: 20px;">
+
+        <button style="background:#4CAF50; color:white;" onclick="addToCart()">Add To Cart</button>
+        <button style="background:#ff5722; color:white;" onclick="window.location.href='type_powder.html'">Go
+            Back</button>
+
+        <div id="cartDisplay">
+            <strong>Your Cart:</strong>
+            <div id="cartItems"></div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart() {
+            const item = {
+                name: "Culinary Grade",
+                price: 12,
+                qty: 1
+            };
+
+            // Load existing cart OR empty array
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+            // If item already in cart → increase qty
+            let existing = cart.find(p => p.name === item.name);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(item);
+            }
+
+            // Save back to localStorage
+            localStorage.setItem("cartArray", JSON.stringify(cart));
+
+            alert("Culinary Grade added to cart!");
+            showCart();
+        }
+
+        function showCart() {
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+            let box = document.getElementById("cartItems");
+
+            if (cart.length === 0) {
+                box.innerHTML = "Cart is empty.";
+                return;
+            }
+
+            box.innerHTML = cart
+                .map(item => `${item.name} - $${item.price} x ${item.qty}`)
+                .join("<br>");
+        }
+
+        // Load cart on page open
+        window.onload = showCart;
+    </script>
+
+</body>
+
+</html>

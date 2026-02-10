@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ceremonial Grade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/736x/10/bd/6b/10bd6bf2c6b99ce1ce927ed2eb3873b3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-box {
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        #cartDisplay {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f7f7;
+            border-radius: 8px;
+            text-align: left;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Ceremonial Grade</h2>
+
+        <div class="image-box">
+            <img src="https://i.pinimg.com/1200x/fd/9d/20/fd9d20d83484fc3d687d07628de8c19a.jpg" alt="Ceremonial Matcha"
+                style="max-width: 100%; max-height: 300px; object-fit: contain; border-radius: 10px;">
+        </div>
+
+        <!-- Add To Cart -->
+        <button style="background-color:#4CAF50; color:white;" onclick="addToCart()">
+            Add To Cart
+        </button>
+
+        <!-- Go Back -->
+        <button style="background-color:#ff5722; color:white;" onclick="window.location.href='type_powder.html'">
+            Go Back
+        </button>
+
+        <!-- Cart Area -->
+        <div id="cartDisplay">
+            <strong>Your Cart:</strong>
+            <div id="cartItems"></div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart() {
+            const item = {
+                name: "Ceremonial Grade",
+                price: 25,
+                qty: 1
+            };
+
+            // Load existing cart
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+            // Check if item already exists
+            let existing = cart.find(p => p.name === item.name);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(item);
+            }
+
+            // Save updated cart
+            localStorage.setItem("cartArray", JSON.stringify(cart));
+
+            alert("Ceremonial Grade added to cart!");
+            showCart();     
+        }
+
+        // Display local cart preview
+        function showCart() {
+            let cart = JSON.parse(localStorage.getItem("cartArray")) || [];
+            let display = document.getElementById("cartItems");
+
+            if (cart.length === 0) {
+                display.innerText = "Cart is empty.";
+                return;
+            }
+
+            display.innerHTML = cart
+                .map(item => `${item.name} - $${item.price} x ${item.qty}`)
+                .join("<br>");
+        }
+
+        window.onload = showCart;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;              
+            justify-content: center;    
+            align-items: center;        
+            height: 100vh;              
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-update {
+            background: rgba(0,0,0,0.4); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+            animation: slideFadeIn 1.5s ease-out;
+        }
+
+        label {
+            display: inline-block;
+            width: 140px;
+        }
+        
+        input[type="text"], input[type="date"], select {
+            width: 220px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #000;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            box-shadow: 0 0 8px #a18cff;
+            transform: scale(1.03);
+        }
+
+
+        button {
+            background: linear-gradient(135deg, #4caf50, #3d9141);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #5ed15d, #4caf50);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-update">
+        <h2>Student Form</h2>
+        <form>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age"><br><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="DOB" name="DOB"><br><br>
+
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex">
+                <option value="" disabled selected>Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br><br>
+            <button type="button" onclick="saveStudent()">Submit</button>
+            <script>
+                function saveStudent() {
+                    let student = {
+                        fname: document.getElementById("fname").value,
+                        lname: document.getElementById("lname").value,
+                        age: document.getElementById("age").value,
+                        dob: document.getElementById("DOB").value,
+                        sex: document.getElementById("sex").value
+                    };
+
+                    // Get existing students array or create new
+                    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+                    // Add new student
+                    students.push(student);
+                    
+                    // Save back to localStorage
+                    localStorage.setItem("students", JSON.stringify(students));
+
+                    alert("Saved Successfully!");
+                    window.location.href = "table.html";
+                }
+            </script>
+
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <p id="name"></p>
+    <p id="multi"></p>
+    <p id="z"></p>
+    <p id="trackname"></p>
+    <p id="class"></p>
+    <script>
+        let text="";
+        let i=10;
+        while(i>0){
+                text+= "<br>" + i ; 
+                i--;
+        }
+        document.getElementById("name").innerHTML = text;
+        function multi(x,y){
+            if(y === undefined){
+                y=3;
+            }
+            return x*y;
+        }
+        document.getElementById("multi").innerHTML = multi(5);
+        
+        function sum(...args) {
+        let sum = 0;
+        for (let arg of args) sum += arg;
+        return sum;
+        }
+        let z = sum(1,2,3,4,5,6,7,8,9);
+        document.getElementById("z").innerHTML = z;
+        
+        const visitCount = new WeakMap();
+        const John = {name:"<br>John", age:40};
+        const Paul = {name:"Paul", age:41};
+        const Ringo = {name:"Ringo", age:42};
+        const George = {name:"George", age:43};   
+        track(John);
+        track(Paul);
+        track(Ringo);
+        track(George);
+        function track(visitor){
+            let count = visitCount.get(visitor) || 0;
+            count++;
+            visitCount.set(visitor,count);
+            text += visitor.name + ", age " + visitor.age + ", has visited " + count + " time(s).<br>";
+        } 
+        document.getElementById("trackname").innerHTML = text;
+            
+
+        class Drink{
+            constructor(Matcha){
+                this.drinkname= Matcha;
+            }
+            present(){
+                return 'I want to order' +this.drinkname;
+            }
+        }
+        class Kindofdrink extends Drink{
+            constructor(Matcha,kind){
+                super(Matcha);
+                this.Kindofdrink = kind;
+            }
+            show(){
+                return this.present() +',Matcha' +this.Kindofdrink;
+            }
+        }
+
+        const mydrink = new Kindofdrink(" Matcha"," Latte");
+        document.getElementById("class").innerHTML = mydrink.show();
+    </script>
+    
+</body>
+</html>

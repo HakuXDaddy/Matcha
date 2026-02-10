@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matcha Powder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://i.pinimg.com/1200x/f0/83/ad/f083adea6c79ec0e80a270c2194e77bc.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+
+            /* Center content under the toolbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            padding-top: 60px;
+            /* height of toolbar  */
+            box-sizing: border-box;
+        }
+
+        /* Center box */
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Toolbar Style */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 10px;
+            gap: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .toolbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .toolbar nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .toolbar nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Form Container */
+        input,
+        select,
+        button {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 10px auto;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #submitBtn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #backBtn {
+            background: #ff5722;
+            color: white;
+        }
+
+        #message {
+            margin-top: 10px;
+            color: green;
+            min-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="logo">Matcha Shop</div>
+        <nav>
+            <a href="Toolbar.html">Home</a>
+            <a href="member_ship.html">Member Ship</a>
+            <a href="type_powder.html">Powder Type</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2>Powder Type</h2>
+
+        <input type="text" id="customerName" placeholder="Customer Name">
+
+        <select id="powderSelect">
+            <option value="" disabled selected>Select Type Of Powder</option>
+            <option value="Ceremonial Grade">Ceremonial Grade</option>
+            <option value="Premium Grade">Premium Grade</option>
+            <option value="Culinary Grade">Culinary Grade</option>
+        </select>
+
+        <button id="submitBtn" onclick="submitOrder()">Submit Order</button>
+        <button id="backBtn" onclick="backToAccount()">Add Member Ship</button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // Load saved data
+        window.onload = function () {
+            document.getElementById("customerName").value = localStorage.getItem("customerName") || "";
+            document.getElementById("powderSelect").value = localStorage.getItem("powderSelect") || "";
+        };
+
+        function submitOrder() {
+            const name = document.getElementById("customerName").value;
+            const powder = document.getElementById("powderSelect").value;
+
+            if (name === "" || powder === "") {
+                document.getElementById("message").innerHTML = "Please fill all fields!";
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem("customerName", name);
+            localStorage.setItem("powderSelect", powder);
+
+            // Redirect based on powder grade
+            if (powder === "Ceremonial Grade") {
+                
+                window.location.href = "ceremonial_form.html";
+            } else if (powder === "Premium Grade") {
+                window.location.href = "premium_form.html";
+            } else if (powder === "Culinary Grade") {
+                window.location.href = "culinary_form.html";
+            }
+        }
+
+        function backToAccount() {
+            window.location.href = "member_ship.html";
+        }
+    </script>
+
+</body>
+
+</html>
